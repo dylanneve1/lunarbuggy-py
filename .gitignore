@@ -1,3 +1,5 @@
 .DS_Store
 buggyudp/__pycache__
 controludp/__pycache__
+buggyudp/artifacts
+controludp/artifacts
