@@ -11,7 +11,7 @@ IMAGE_CHUNK_SIZE = 1024
 SEPARATOR = b"||"  # used to split header from data
 WINDOW_SIZE = 20     # Number of packets to send concurrently
 
-def send_window(sock, addr, packets, window_size, max_retries=10, ack_timeout=30):
+def send_window(sock, addr, packets, window_size, max_retries=10, ack_timeout=5):
     """
     Sends packets using a sliding window protocol. ACKs may arrive out-of-order.
     Only unacknowledged packets in the current window are resent.
