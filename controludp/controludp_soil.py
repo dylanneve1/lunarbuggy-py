@@ -2,10 +2,10 @@ import socket
 from controludp_utils import get_input
 
 def soil_sample():
-    host = socket.gethostname()
+    host = "46.7.192.25"
     port = 5000
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     server_addr = (host, port)
     sock.settimeout(1)
 

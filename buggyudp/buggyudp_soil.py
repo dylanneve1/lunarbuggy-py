@@ -2,10 +2,10 @@ import socket
 import random
 
 def soil_sample():
-    host = socket.gethostname()
+    host = "0.0.0.0"
     port = 5000
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     sock.bind((host, port))
 
     print("UDP Soil Sampling Server started on port", port)

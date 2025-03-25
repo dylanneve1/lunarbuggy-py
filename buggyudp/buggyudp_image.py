@@ -7,11 +7,11 @@ from buggyudp_generate_image import rover_prompt
 from buggyudp_utils import send_with_ack
 import math
 
-IMAGE_CHUNK_SIZE = 8192
+IMAGE_CHUNK_SIZE = 1024
 SEPARATOR = b"||"  # used to split header from data
 WINDOW_SIZE = 20     # Number of packets to send concurrently
 
-def send_window(sock, addr, packets, window_size, max_retries=10, ack_timeout=3):
+def send_window(sock, addr, packets, window_size, max_retries=10, ack_timeout=30):
     """
     Sends packets using a sliding window protocol. ACKs may arrive out-of-order.
     Only unacknowledged packets in the current window are resent.
@@ -130,10 +130,10 @@ def image_send(sock, addr, image_path):
         return False
 
 def image_server():
-    host = socket.gethostname()
+    host = "0.0.0.0"
     port = 6000
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     sock.bind((host, port))
     print("UDP Image Server started on port", port)
 
@@ -179,7 +179,7 @@ def image_server():
                         continue
                     
                     # Wait for final confirmation from client.
-                    sock.settimeout(5)
+                    sock.settimeout(60)
                     try:
                         resp, _ = sock.recvfrom(1024)
                         resp_msg = resp.decode().strip()

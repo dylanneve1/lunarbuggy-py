@@ -2,10 +2,10 @@ import socket
 import random
 
 def movement():
-    host = socket.gethostname()
+    host = "0.0.0.0"
     port = 4000
 
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     sock.bind((host, port))
 
     print("UDP Movement Server started on port", port)

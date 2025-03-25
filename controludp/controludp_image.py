@@ -4,7 +4,7 @@ import uuid
 import hashlib
 import time
 
-IMAGE_CHUNK_SIZE = 8192
+IMAGE_CHUNK_SIZE = 1024
 SEPARATOR = b"||"  # matches the server's separator
 
 def receive_image(sock, attempts):
@@ -15,7 +15,7 @@ def receive_image(sock, attempts):
         # Receive start packet then send ACK.
         data, addr = sock.recvfrom(1024)
         valid_start = False
-        start_packet_timeout = 5
+        start_packet_timeout = 30
         deadline = time.time() + start_packet_timeout
         while not valid_start and time.time() < deadline:
             try:
@@ -134,12 +134,12 @@ def receive_image(sock, attempts):
         return False
 
 def image_client():
-    host = socket.gethostname()
+    host = "46.7.192.25"
     port = 6000
     server_addr = (host, port)
     
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    sock.settimeout(10)
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
+    sock.settimeout(60)
     
     try:
         while True:
