@@ -17,12 +17,6 @@ def movement():
             message = data.decode().strip()
             print(f"Received from {addr}: {message}")
 
-            if message.lower() == 'q':
-                print("Quit command received. Shutting down movement server.")
-                response = "Server is shutting down."
-                sock.sendto(response.encode(), addr)
-                break
-
             response = ""
             match message:
                 case 'w':

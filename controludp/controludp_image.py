@@ -144,9 +144,9 @@ def image_client():
     try:
         while True:
             command = input("Enter 'get_image' to receive an image, or 'q' to quit: ")
-            sock.sendto(command.encode(), server_addr)
             if command.lower() == 'q':
                 break
+            sock.sendto(command.encode(), server_addr)
             if command == "get_image":
                 attempts = 0
                 max_attempts = 3

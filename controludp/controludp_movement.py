@@ -13,12 +13,9 @@ def movement():
         while True:
             try:
                 command = get_input()
-                sock.sendto(command.encode(), server_addr)
-                
                 if command.lower() == 'q':
-                    data, addr = sock.recvfrom(1024)
-                    print("Response:", data.decode())
                     break
+                sock.sendto(command.encode(), server_addr)
                 
                 data, addr = sock.recvfrom(1024)
                 print("Response:", data.decode())

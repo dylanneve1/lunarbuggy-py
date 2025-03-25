@@ -150,10 +150,6 @@ def image_server():
             message = data.decode().strip()
             print(f"Received from {addr}: {message}")
 
-            if message.lower() == 'q':
-                print("Quit command received. Shutting down image server.")
-                break
-
             if message == "get_image":
                 # Generate image.
                 unique_id = uuid.uuid4().hex
